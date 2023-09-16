@@ -93,3 +93,21 @@ body {font-size: 100%}
     border-radius: 1rem;
     padding: 0.5rem .7rem;
 }
+
+.products-ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+.products-li {
+    
+}
+
+.product-image {
+    width: 7rem;
+}
+
+.product-title {
+
+}
