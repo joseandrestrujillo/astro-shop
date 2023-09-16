@@ -4,22 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla Shop Web</title>
+    <link rel="stylesheet" href="./style.css">
     <script src="./index.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Vanilla Shop</h1>
-        <button id="login-btn">Log In</button>
+    <header class="header" id="header">
+        <div class="header-container container" id="header-container">
+            <h1 class="h1-title">Vanilla Shop</h1>
+            <button id="login-btn" class="login-btn">Log In</button>
+        </div>
     </header>
     <main></main>
-    <dialog id="login-dialog">
+    <dialog id="login-dialog" class="login-dialog">
         <form>
-            <label>
-                Username:
-                <input type="text" name="username" id="login-username-input">
-            </label>
-            <button value="cancel" formmethod="dialog">Cancel</button>
-            <button id="login-confirm-btn" value="default">Confirm</button>
+            <fieldset class="login-fieldset-fields">
+                <legend>Login</legend>
+                <label>
+                    <span>Username:</span>
+                    <input type="text" name="username" id="login-username-input">
+                </label>
+                <label>
+                    <span>Password:</span>
+                    <input type="password" name="password" id="login-password-input">
+                </label>
+            </fieldset>
+            <fieldset class="login-fieldset-buttons">
+                <button value="cancel" formmethod="dialog">Cancel</button>
+                <button id="login-confirm-btn" value="default">Confirm</button>
+            </fieldset>
         </form>
     </dialog>
     <footer></footer>
