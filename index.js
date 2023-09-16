@@ -51,9 +51,14 @@ async function main() {
         pElement.innerText = product.title
         pElement.classList = ["product-title"]
 
+        let spanElement = document.createElement('span')
+        spanElement.innerText = "$ " + product.price
+        spanElement.classList = ["product-price"]
+
 
         liElement.appendChild(imgElement)
         liElement.appendChild(pElement)
+        liElement.appendChild(spanElement)
 
         ulElement.appendChild(liElement)
     });
