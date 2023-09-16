@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vanilla Shop Web</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./index.js"></script>
-</head>
-<body>
-    <header class="header" id="header">
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Vanilla Shop Web">
+	<header class="header" id="header">
         <div class="header-container container" id="header-container">
             <h1 class="h1-title">Vanilla-Shop</h1>
             <button id="login-btn" class="login-btn">Log In</button>
@@ -35,5 +30,4 @@
         </form>
     </dialog>
     <footer></footer>
-</body>
-</html>
+</Layout>
