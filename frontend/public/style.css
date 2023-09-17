@@ -33,57 +33,6 @@ body {font-size: 100%}
     color: #11575d;
 }
 
-.login-dialog {
-    margin: auto;
-    border: none;
-}
-
-.login-dialog form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.login-fieldset-fields,
-.login-fieldset-buttons {
-    border: none;
-}
-
-.login-fieldset-fields {
-    position: relative;
-    padding-top: 3rem;
-    font-size: 1em;
-}
-
-.login-fieldset-buttons {
-    display: flex;
-    justify-content: space-around;
-    padding: .4rem;
-    padding-bottom: .7rem;
-}
-.login-fieldset-fields legend {
-    position: absolute;
-    top: .8rem;
-    left: calc(50% - 1.7rem);
-    font-size: 1.5em;
-    margin: 0;
-}
-
-.login-fieldset-fields label{
-    display: flex;
-    flex-direction: column;
-    font-size: 1em;
-}
-
-
-.login-fieldset-buttons button{
-    border: 0;
-    border-radius: 1rem;
-    padding: 0.5rem .7rem;
-    background-color: #2c6166;
-    color: #e7e5e5;
-}
-
 .products-ul {
     list-style: none;
     display: grid;

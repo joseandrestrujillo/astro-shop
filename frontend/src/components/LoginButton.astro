@@ -2,13 +2,16 @@
 ---
 <button id="login-btn" class="login-btn">Log In</button>
 
-<script is:inline>
-	let loginBtn = document.querySelector('#login-btn')
+<script>
+	import { isLoginDialogOpen } from "../stores/isLoginDialogOpen";
 
-	loginBtn.addEventListener('click', _ => {
-		let loginDialog = document.querySelector('#login-dialog')
-		loginDialog.showModal()
-	})
+	function openDialog() {
+		isLoginDialogOpen.set(true);
+	}
+
+	let loginButton: HTMLButtonElement | null = document.querySelector("#login-btn")
+
+	loginButton && loginButton.addEventListener('click', openDialog);
 </script>
 
 <style>

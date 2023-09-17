@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import LoginButton from "../components/LoginButton.astro";
+import LoginModal from '../components/LoginModal.astro';
 ---
 
 <Layout title="Vanilla Shop Web">
@@ -11,24 +12,6 @@ import LoginButton from "../components/LoginButton.astro";
         </div>
     </header>
     <main class="container"></main>
-    <dialog id="login-dialog" class="login-dialog">
-        <form>
-            <fieldset class="login-fieldset-fields">
-                <legend>Login</legend>
-                <label>
-                    <span>Username:</span>
-                    <input type="text" name="username" id="login-username-input">
-                </label>
-                <label>
-                    <span>Password:</span>
-                    <input type="password" name="password" id="login-password-input">
-                </label>
-            </fieldset>
-            <fieldset class="login-fieldset-buttons">
-                <button value="cancel" formmethod="dialog">Cancel</button>
-                <button id="login-confirm-btn" value="default">Confirm</button>
-            </fieldset>
-        </form>
-    </dialog>
+    <LoginModal/>
     <footer></footer>
 </Layout>
