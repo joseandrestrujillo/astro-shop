@@ -48,7 +48,7 @@ bun run start
 The project should now be running at http://localhost:4321.
 
 ## Future Development
-The plan for future development includes building a backend with Node.js and Express to replace the current Fake Store API. This will allow for more control and customization of the data served to the frontend.
+The plan for future development includes building a backend with Bun and Express to replace the current Fake Store API.
 
 ## Contributing
 As an open-source project, we welcome contributions of all forms.
