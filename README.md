@@ -41,9 +41,17 @@ cd vanilla-shop/frontend
 ```sh
 bun install
 ```
+or with npm
+```sh
+npm install
+```
 4. Start the project:
 ```sh
 bun run start
+```
+or with npm
+```sh
+npm run start
 ```
 The project should now be running at http://localhost:4321.
 
