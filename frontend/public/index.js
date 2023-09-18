@@ -1,71 +1,33 @@
+async function main () {
+  const loginUsernameInput = document.querySelector('#login-username-input')
+  const loginConfirmBtn = document.querySelector('#login-confirm-btn')
 
+  // TODO: Creo que esto se puede hacer de una manera más directa basicamente desde el evento click del loginConfirmBtn accediendo al valor del input mediante el form
+  loginUsernameInput.addEventListener('change', e => {
+    const value = e.target.value
+    loginConfirmBtn.value = value
+  })
 
-async function main() {
-    let loginBtn = document.querySelector('#login-btn')
+  loginConfirmBtn.addEventListener('click', event => {
+    event.preventDefault()
 
-    let loginUsernameInput = document.querySelector('#login-username-input')
-    let loginConfirmBtn = document.querySelector('#login-confirm-btn')
+    const loginBtn = document.querySelector('#login-btn')
 
-    // TODO: Creo que esto se puede hacer de una manera más directa basicamente desde el evento click del loginConfirmBtn accediendo al valor del input mediante el form
-    loginUsernameInput.addEventListener('change', e => {
-        let value = e.target.value
-        loginConfirmBtn.value = value
-    })
+    loginBtn.hidden = true
 
-    loginConfirmBtn.addEventListener('click', event => {
-        event.preventDefault()
+    const headerContainer = document.querySelector('#header-container')
 
-        let loginBtn = document.querySelector('#login-btn')
-        
-        loginBtn.hidden = true
+    const loggedUser = document.createElement('span')
 
-        let headerContainer = document.querySelector("#header-container")
-        
-        let loggedUser = document.createElement("span")
+    loggedUser.innerText = loginConfirmBtn.value
 
-        loggedUser.innerText = loginConfirmBtn.value
+    headerContainer.appendChild(loggedUser)
 
-        headerContainer.appendChild(loggedUser)
-
-        let loginDialog = document.querySelector('#login-dialog')
-        loginDialog.open = false
-    })
-
-    let products = await getProducts()
-    let ulElement = document.createElement('ul')
-    ulElement.classList = ["products-ul"]
-    products.forEach(product => {
-        let liElement = document.createElement('li')
-        liElement.classList = ["product-li"]
-
-        let imgElement = document.createElement('img')
-        imgElement.src = product.image
-        imgElement.classList = ["product-image"]
-
-        let pElement = document.createElement('p')
-        pElement.innerText = product.title
-        pElement.classList = ["product-title"]
-
-        let spanElement = document.createElement('span')
-        spanElement.innerText = "$ " + product.price
-        spanElement.classList = ["product-price"]
-
-
-        liElement.appendChild(imgElement)
-        liElement.appendChild(pElement)
-        liElement.appendChild(spanElement)
-
-        ulElement.appendChild(liElement)
-    });
-
-    document.querySelector('main').appendChild(ulElement)
-}
-
-async function getProducts() {
-    return await fetch('https://fakestoreapi.com/products/')
-        .then(res=>res.json()) 
+    const loginDialog = document.querySelector('#login-dialog')
+    loginDialog.open = false
+  })
 }
 
 document.addEventListener('DOMContentLoaded', (ev) => {
-    main()
+  main()
 })

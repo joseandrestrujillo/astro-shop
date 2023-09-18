@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import LoginButton from "../components/LoginButton.astro";
 import LoginModal from '../components/LoginModal.astro';
+import ProductList from '../components/ProductList.astro';
 ---
 
 <Layout title="Vanilla Shop Web">
@@ -11,7 +12,9 @@ import LoginModal from '../components/LoginModal.astro';
             <LoginButton/>
         </div>
     </header>
-    <main class="container"></main>
+    <main class="container">
+        <ProductList/>
+    </main>
     <LoginModal/>
     <footer></footer>
 </Layout>
