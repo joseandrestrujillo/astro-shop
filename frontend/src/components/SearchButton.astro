@@ -7,15 +7,10 @@
 </button>
 
 <script>
+	import { setOnClickHandle } from "../client-ui-scripts/utils";
 	import { isSearchDialogOpen } from "../stores/isSearchDialogOpen";
 
-	function openDialog() {
-		isSearchDialogOpen.set(true);
-	}
-
-	let searchButton: HTMLButtonElement | null = document.querySelector("#search-btn")
-
-	searchButton && searchButton.addEventListener('click', openDialog);
+	setOnClickHandle("#search-btn", _ => isSearchDialogOpen.set(true))
 </script>
 
 <style>
