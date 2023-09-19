@@ -2,10 +2,10 @@
 ---
 
 <dialog id="search-dialog" class="search-dialog">
-    <form>
+    <form action="/search">
         <fieldset class="search-fieldset-fields">
             <legend>What are you looking for?</legend>
-            <input type="text" name="search" id="search-search-input">
+            <input type="text" name="query" id="search-input">
         </fieldset>
         <fieldset class="search-fieldset-buttons">
             <button id="search-cancel-btn" value="cancel" formmethod="dialog">Cancel</button>
@@ -16,19 +16,21 @@
 
 <script>
     import { isSearchDialogOpen } from '../stores/isSearchDialogOpen';
-    
-    isSearchDialogOpen.subscribe(open => {
-      if (open) {
-        let searchDialog: HTMLDialogElement | null= document.querySelector('#search-dialog')
-        searchDialog && searchDialog.showModal()
-      }
-    })
+    import { searchQuery } from '../stores/search';
+    import { handleDialogOpen } from "../services/handleDialogOpen";
+    import { setOnClickHandle } from "../client-ui-scripts/utils";
 
-    let searchCancelButton: HTMLButtonElement | null = document.querySelector("#search-cancel-btn")
-    searchCancelButton && searchCancelButton.addEventListener("click", _ => {
+    isSearchDialogOpen.subscribe(handleDialogOpen)
+    setOnClickHandle("#search-cancel-btn", _ => isSearchDialogOpen.set(false))
+    setOnClickHandle("#search-input", (event) => {
+        event.preventDefault()
+        const inputElement: HTMLInputElement | null = document.querySelector("#search-input")
+        const query = inputElement ? inputElement.value : null
+        searchQuery.set(query)
         isSearchDialogOpen.set(false)
     })
 </script>
+
 
 <style>
     .search-dialog {
