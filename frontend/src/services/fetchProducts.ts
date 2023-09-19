@@ -1,7 +1,7 @@
 import type { Product } from '../types/Product'
 import type { ProductDTO } from '../types/ProductDTO'
 
-export async function getProducts (): Promise<Product[]> {
+export async function fetchProducts (): Promise<Product[]> {
   const response: ProductDTO[] = await fetch('https://fakestoreapi.com/products/')
     .then(async res => await res.json())
 

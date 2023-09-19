@@ -3,22 +3,22 @@
 <ul id="ul-product-list" class="products-ul"></ul>
 
 <script>
-    import { getProducts } from "../services/getProducts";
     import { addChild } from "../client-ui-scripts/utils";
+    import { products } from "../stores/products";
 
-    const products = await getProducts()
-
-    products.forEach(product => {
-        let liElement = document.createElement('li')
-        liElement.className = "product-li"
-        liElement.innerHTML = `
+    products.subscribe(products => {
+        products?.forEach(product => {
+            let liElement = document.createElement('li')
+            liElement.className = "product-li"
+            liElement.innerHTML = `
             <img src=${product.image} class="product-image"/>
             <p class="product-title">${product.title}</p>
             <span class="product-price">${"$ " + product.price}</span>
-        `
-
-        addChild("#ul-product-list", liElement)
-    });
+            `
+            
+            addChild("#ul-product-list", liElement)
+        });
+    })
 
 </script>
 

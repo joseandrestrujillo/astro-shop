@@ -11,3 +11,8 @@ import ProductList from '../components/ProductList.astro';
     <SearchModal/>
     <footer></footer>
 </Layout>
+
+<script>import { updateProducts } from "../services/updateProducts";
+
+    updateProducts()
+</script>
