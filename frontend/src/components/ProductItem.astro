@@ -11,7 +11,7 @@ const { product } = Astro.props
 <li class="product-li">
     <img src={product.image} class="product-image"/>
     <p class="product-title">{product.title}</p>
-    <span class="product-price">{"1 " + product.price}</span>
+    <span class="product-price">{"$ " + product.price}</span>
 </li>
 
 <style>
