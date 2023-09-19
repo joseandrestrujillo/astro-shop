@@ -20,15 +20,16 @@
     import { handleDialogOpen } from "../services/handleDialogOpen";
     import { setOnClickHandle } from "../client-ui-scripts/utils";
 
-    isSearchDialogOpen.subscribe(handleDialogOpen)
     setOnClickHandle("#search-cancel-btn", _ => isSearchDialogOpen.set(false))
-    setOnClickHandle("#search-input", (event) => {
+    setOnClickHandle("#search-confirm-btn", (event) => {
         event.preventDefault()
         const inputElement: HTMLInputElement | null = document.querySelector("#search-input")
         const query = inputElement ? inputElement.value : null
         searchQuery.set(query)
         isSearchDialogOpen.set(false)
     })
+    
+    isSearchDialogOpen.subscribe(handleDialogOpen)
 </script>
 
 
