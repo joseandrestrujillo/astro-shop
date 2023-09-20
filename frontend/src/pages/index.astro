@@ -12,7 +12,10 @@ import ProductList from '../components/ProductList.astro';
     <footer></footer>
 </Layout>
 
-<script>import { updateProducts } from "../services/updateProducts";
-
+<script>
+    import { updateProducts } from "../services/updateProducts";
+    import { searchQuery } from "../stores/search";
+    
     updateProducts()
+    searchQuery.subscribe(_ => updateProducts())
 </script>

@@ -1,9 +1,23 @@
 import { products } from '../stores/products'
+import { searchQuery } from '../stores/search'
 import { fetchProducts } from './fetchProducts'
 
 export async function updateProducts (): Promise<void> {
-  const cachedProducts = products.get()
+  let cachedProducts = products.get()
+
   if (cachedProducts === null) {
-    products.set(await fetchProducts())
+    cachedProducts = await fetchProducts()
   }
+
+  const query = searchQuery.get()
+  let filteredProducts = cachedProducts
+  if (query != null) {
+    filteredProducts = []
+    cachedProducts.forEach(product => {
+      if (product.title.toLowerCase().includes(query.toLowerCase())) {
+        filteredProducts.push(product)
+      }
+    })
+  }
+  products.set(filteredProducts)
 }

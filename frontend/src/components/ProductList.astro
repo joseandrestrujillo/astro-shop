@@ -3,10 +3,11 @@
 <ul id="ul-product-list" class="products-ul"></ul>
 
 <script>
-    import { addChild } from "../client-ui-scripts/utils";
+    import { setChildren } from "../client-ui-scripts/utils";
     import { products } from "../stores/products";
 
     products.subscribe(products => {
+        const liElements: HTMLLIElement[]= []
         products?.forEach(product => {
             let liElement = document.createElement('li')
             liElement.className = "product-li"
@@ -16,8 +17,9 @@
             <span class="product-price">${"$ " + product.price}</span>
             `
             
-            addChild("#ul-product-list", liElement)
+            liElements.push(liElement)
         });
+        setChildren("#ul-product-list", liElements)
     })
 
 </script>

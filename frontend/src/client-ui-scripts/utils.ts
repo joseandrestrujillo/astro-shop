@@ -17,3 +17,14 @@ export function addChild (querySelector: string, element: HTMLElement): void {
     throw new Error('There are not elements that matches with ' + querySelector)
   }
 }
+
+export function setChildren (querySelector: string, elements: HTMLElement[]): void {
+  const parent: HTMLElement | null = document.querySelector(querySelector)
+
+  if (parent != null) {
+    parent.innerHTML = ''
+    elements.forEach(element => { addChild(querySelector, element) })
+  } else {
+    throw new Error('There are not elements that matches with ' + querySelector)
+  }
+}
