@@ -2,10 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import SearchModal from '../components/SearchModal.astro';
 import ProductList from '../components/ProductList.astro';
+import FilterAside from '../components/FilterAside.astro';
 ---
 
 <Layout title="Vanilla Shop Web">
-    <main class="container">
+    <main class="container main-section">
+        <FilterAside/>
         <ProductList/>
     </main>
     <SearchModal/>
@@ -19,3 +21,11 @@ import ProductList from '../components/ProductList.astro';
     updateProducts()
     searchQuery.subscribe(_ => updateProducts())
 </script>
+
+<style>
+    .main-section {
+        display: flex;
+        flex-direction: row;
+        padding: 1rem;
+    }
+</style>
