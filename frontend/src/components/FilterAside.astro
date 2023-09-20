@@ -6,16 +6,16 @@
         <fieldset class="filter-fieldset-price">
             <label>
                 Min Price
-                <input type="number" name="min-price" value="0">
+                <input id="min-price-input" type="number" name="min-price" value="0">
             </label>
             <label>
                 Max Price
-                <input type="number" name="max-price" value="999">
+                <input id="max-price-input" type="number" name="max-price" value="999">
             </label>
         </fieldset>
         <label>
             Category
-            <select name="category" id="filter-category-select">
+            <select id="category-selector" name="category" id="filter-category-select">
                 <option value="all" selected>All</option>
                 <option value="electronics">Electronics</option>
                 <option value="jewelery">Jewelery</option>
@@ -27,9 +27,47 @@
             Number of stars
             <input type="number" name="rate" id="filter-rate-input" min="1" max="5" value="1">
         </label>
-        <button>Filtrar</button>
+        <button id="filter-button">Filtrar</button>
     </form>
 </aside>
+
+<script>
+    import { getDomElementOrThrow, setOnClickHandle } from "../client-ui-scripts/utils"
+    import { filterCategory } from "../stores/filterCategory"
+    import { filterStars } from "../stores/filterStars"
+    import { filterPrice } from "../stores/price"
+    import type { Category } from "../types/Product"
+
+    const minPriceInput: HTMLInputElement = getDomElementOrThrow("#min-price-input")    
+    const maxPriceInput: HTMLInputElement = getDomElementOrThrow("#max-price-input")
+    const categorySelector: HTMLSelectElement = getDomElementOrThrow("#category-selector")
+    const rateInput: HTMLInputElement = getDomElementOrThrow("#filter-rate-input")
+    
+    setOnClickHandle("#filter-button", (event) => {
+        event.preventDefault()
+
+        if (minPriceInput.value != "0" || maxPriceInput.value != "999") {
+            filterPrice.set([Number(minPriceInput.value), Number(maxPriceInput.value)])
+        }
+        filterCategory.set(categorySelector.value != "all" ? categorySelector.value as Category : null)
+        if (rateInput.value != "1") {
+            filterStars.set(Number(rateInput.value))
+        }
+    })
+
+    filterPrice.subscribe(value => {
+        minPriceInput.value = value != null ? value[0].toString() : "0" 
+        maxPriceInput.value = value != null ? value[1].toString() : "999" 
+    })
+
+    filterCategory.subscribe(value => {
+        categorySelector.value = value != null ? value : "all" 
+    })
+
+    filterStars.subscribe(value => {
+        rateInput.value = value != null ? value.toString() : "1"
+    })
+</script>
 
 <style>
     aside {

@@ -16,10 +16,16 @@ import FilterAside from '../components/FilterAside.astro';
 
 <script>
     import { updateProducts } from "../services/updateProducts";
+    import { filterCategory } from "../stores/filterCategory";
+    import { filterStars } from "../stores/filterStars";
+    import { filterPrice } from "../stores/price";
     import { searchQuery } from "../stores/search";
     
     updateProducts()
     searchQuery.subscribe(_ => updateProducts())
+    filterPrice.subscribe(_ => updateProducts())
+    filterCategory.subscribe(_ => updateProducts())
+    filterStars.subscribe(_ => updateProducts())
 </script>
 
 <style>
