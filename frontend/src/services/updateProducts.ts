@@ -1,9 +1,9 @@
-import { products } from '../stores/products'
+import { allProducts, products } from '../stores/products'
 import { searchQuery } from '../stores/search'
 import { fetchProducts } from './fetchProducts'
 
 export async function updateProducts (): Promise<void> {
-  let cachedProducts = products.get()
+  let cachedProducts = allProducts.get()
 
   if (cachedProducts === null) {
     cachedProducts = await fetchProducts()

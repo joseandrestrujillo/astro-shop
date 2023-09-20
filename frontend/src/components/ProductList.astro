@@ -1,22 +1,24 @@
----
+---import { getDomElementOrThrow } from "../client-ui-scripts/utils";
+
 ---
 <div class="product-list-container">
+    <h2>Productos</h2>
     <section class="search-filters-section">
         <ul class="filter-list">
-            <li class="filter-item">
-                <span class="filter-text">"cotton"</span>
+            <li class="filter-item" id="filter-search-item">
+                <span class="filter-text" id="filter-search-text">"cotton"</span>
                 <button class="delete-filter-button">x</button>
             </li>
-            <li class="filter-item">
-                <span class="filter-text">$0-$100</span>
+            <li class="filter-item" id="filter-price-item">
+                <span class="filter-text" id="filter-price-text">$0-$100</span>
                 <button class="delete-filter-button">x</button>
             </li>
-            <li class="filter-item">
-                <span class="filter-text">Category "electronics"</span>
+            <li class="filter-item" id="filter-category-item">
+                <span class="filter-text" id="filter-category-text">Category "electronics"</span>
                 <button class="delete-filter-button">x</button>
             </li>
-            <li class="filter-item">
-                <span class="filter-text">2 stars</span>
+            <li class="filter-item" id="filter-stars-item">
+                <span class="filter-text" id="filter-stars-text">2 stars</span>
                 <button class="delete-filter-button">x</button>
             </li>
         </ul>
@@ -25,8 +27,42 @@
 </div>
 
 <script>
-    import { setChildren } from "../client-ui-scripts/utils";
+    import { getDomElementOrThrow, setChildren } from "../client-ui-scripts/utils";
+import { updateProducts } from "../services/updateProducts";
+    import { filterCategory } from "../stores/filterCategory";
+    import { filterStars } from "../stores/filterStars";
+    import { filterPrice } from "../stores/price";
     import { products } from "../stores/products";
+    import { searchQuery } from "../stores/search";
+
+
+
+    const removeFilter = (event: Event) => {
+        const parentElement = ((event.target as HTMLButtonElement).parentElement as HTMLLIElement)
+        parentElement.classList.add("hide")
+        const filterType = parentElement.id.split("-")[1] as string
+        switch (filterType) {
+            case "search":
+                searchQuery.set(null)
+                break;
+            case "price":
+                filterPrice.set(null)
+                break;
+            case "category":
+                filterCategory.set(null)
+                break;
+            case "stars":
+                filterStars.set(null)
+                break;
+            default:
+                break;
+        }
+        updateProducts()
+    }
+    
+    document.querySelectorAll(".delete-filter-button").forEach(node => {
+        node.addEventListener("click", removeFilter)
+    })
 
     products.subscribe(products => {
         const liElements: HTMLLIElement[]= []
@@ -44,6 +80,58 @@
         setChildren("#ul-product-list", liElements)
     })
 
+    searchQuery.subscribe(query => {
+        const searchItem = getDomElementOrThrow("#filter-search-item")
+        const searchText = getDomElementOrThrow("#filter-search-text")
+        if (query === null) {
+            searchText.innerText = ""
+            searchItem.classList.add("hide")
+            return
+        } else {
+            searchText.innerText = `"${query}"`
+            searchItem.classList.remove("hide")
+        }
+    })
+
+    filterPrice.subscribe(price => {
+        const priceItem = getDomElementOrThrow("#filter-price-item")
+        const priceText = getDomElementOrThrow("#filter-price-text")
+        if (price === null) {
+            priceText.innerText = ""
+            priceItem.classList.add("hide")
+            return
+        } else {
+            priceText.innerText = `$${price[0]}-$${price[1]}`
+            priceItem.classList.remove("hide")
+        }
+    })
+
+    filterCategory.subscribe(category => {
+        const categoryItem = getDomElementOrThrow("#filter-category-item")
+        const categoryText = getDomElementOrThrow("#filter-category-text")
+        if (category === null) {
+            categoryText.innerText = ""
+            categoryItem.classList.add("hide")
+            return
+        } else {
+            categoryText.innerText = `Category "${category}"`
+            categoryItem.classList.remove("hide")
+        }
+    })
+
+    filterStars.subscribe(stars => {
+        const starsItem = getDomElementOrThrow("#filter-stars-item")
+        const starsText = getDomElementOrThrow("#filter-stars-text")
+        if (stars === null) {
+            starsText.innerText = ""
+            starsItem.classList.add("hide")
+            return
+        } else {
+            starsText.innerText = `${stars} stars`
+            starsItem.classList.remove("hide")
+        }
+    })
+
 </script>
 
 <style is:inline>
@@ -52,10 +140,10 @@
         flex-direction: column;
         gap: 1rem;
     }
-
+    
     .search-filters-section {
     }
-
+    
     .filter-list {
         list-style: none;
         display: flex;
@@ -63,7 +151,7 @@
         gap: 1rem;
         padding: 0;
     }
-
+    
     .filter-item {
         display: flex;
         flex-direction: row;
@@ -72,6 +160,9 @@
         padding: .1rem 0 .1rem .5rem;
         border-radius: 1rem;
         border: 1px solid #2c6166;
+    }
+    .hide {
+        display: none;
     }
 
     .filter-text {

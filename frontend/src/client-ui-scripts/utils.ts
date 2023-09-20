@@ -1,29 +1,26 @@
 export function setOnClickHandle (querySelector: string, callback: (event: MouseEvent) => void): void {
-  const element: HTMLElement | null = document.querySelector(querySelector)
-
-  if (element != null) {
-    element.addEventListener('click', callback)
-  } else {
-    throw new Error('There are not elements that matches with ' + querySelector)
-  }
+  const element: HTMLElement = getDomElementOrThrow(querySelector)
+  element.addEventListener('click', callback)
 }
 
 export function addChild (querySelector: string, element: HTMLElement): void {
-  const parent: HTMLElement | null = document.querySelector(querySelector)
+  const parent: HTMLElement = getDomElementOrThrow(querySelector)
 
-  if (parent != null) {
-    parent.appendChild(element)
-  } else {
-    throw new Error('There are not elements that matches with ' + querySelector)
-  }
+  parent.appendChild(element)
 }
 
 export function setChildren (querySelector: string, elements: HTMLElement[]): void {
-  const parent: HTMLElement | null = document.querySelector(querySelector)
+  const parent: HTMLElement = getDomElementOrThrow(querySelector)
 
-  if (parent != null) {
-    parent.innerHTML = ''
-    elements.forEach(element => { addChild(querySelector, element) })
+  parent.innerHTML = ''
+  elements.forEach(element => { addChild(querySelector, element) })
+}
+
+export function getDomElementOrThrow<T extends HTMLElement = HTMLElement> (querySelector: string): T {
+  const element: T | null = document.querySelector<T>(querySelector)
+
+  if (element != null) {
+    return element
   } else {
     throw new Error('There are not elements that matches with ' + querySelector)
   }

@@ -1,3 +1,4 @@
+import { allProducts } from '../stores/products'
 import type { Product } from '../types/Product'
 import type { ProductDTO } from '../types/ProductDTO'
 
@@ -16,5 +17,6 @@ export async function fetchProducts (): Promise<Product[]> {
       stars: productDto.rating.rate
     })
   })
+  allProducts.set(products)
   return products
 }
