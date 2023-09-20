@@ -6,16 +6,20 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
-This project is a simple online store built with [Astro](https://astro.build), JavaScript for the client-side scripts, TypeScript for server-side scripts, HTML5, and CSS3. This is an open-source project aiming to provide a practical and straightforward e-commerce platform.
+This project is a simple online store built with [Astro](https://astro.build), JavaScript for the client-side scripts, TypeScript for server-side scripts, HTML5, and CSS3. This is an open-source project aiming to provide a practical and straightforward e-commerce web.
 
 ## Project Overview
 
 Currently, the backend of this project utilizes the [Fake Store API](https://fakestoreapi.com/), a free online REST API that provides fake data for e-commerce or shopping websites.
 
-In the future, the project is set to evolve with a backend developed with Bun.js and Express.
+### Features
+- Users can search any product by title.
+- Users can filter products by price range.
+- Users can filter products by category.
+- Users can filter products by rate.
 
 ## Screenshots
-![Home Page Screenshot](./docs/images/screenshot.png)
+![Home Page Screenshot with filters](./docs/images/screenshot.png)
 
 ## Getting Started
 
