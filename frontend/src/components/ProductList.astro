@@ -1,6 +1,28 @@
 ---
 ---
-<ul id="ul-product-list" class="products-ul"></ul>
+<div class="product-list-container">
+    <section class="search-filters-section">
+        <ul class="filter-list">
+            <li class="filter-item">
+                <span class="filter-text">"cotton"</span>
+                <button class="delete-filter-button">x</button>
+            </li>
+            <li class="filter-item">
+                <span class="filter-text">$0-$100</span>
+                <button class="delete-filter-button">x</button>
+            </li>
+            <li class="filter-item">
+                <span class="filter-text">Category "electronics"</span>
+                <button class="delete-filter-button">x</button>
+            </li>
+            <li class="filter-item">
+                <span class="filter-text">2 stars</span>
+                <button class="delete-filter-button">x</button>
+            </li>
+        </ul>
+    </section>
+    <ul id="ul-product-list" class="products-ul"></ul>
+</div>
 
 <script>
     import { setChildren } from "../client-ui-scripts/utils";
@@ -25,10 +47,64 @@
 </script>
 
 <style is:inline>
+    .product-list-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .search-filters-section {
+    }
+
+    .filter-list {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    .filter-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: fit-content;
+        padding: .1rem 0 .1rem .5rem;
+        border-radius: 1rem;
+        border: 1px solid #2c6166;
+    }
+
+    .filter-text {
+        color: #2c6166;
+        font-weight: bold;
+    }
+
+    .delete-filter-button {
+        color: #c50000;
+        font-weight: 500;
+        background: none;
+        border: none;
+        padding-block: 0;
+        padding-inline: 0;
+        margin-left: .2rem;
+        aspect-ratio: 1/1;
+        padding: .1rem .5rem;
+        border-radius: 50%;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+
+    .delete-filter-button:hover {
+        background-color: #dadada;
+    }
+
+    
+
     .products-ul {
         list-style: none;
         display: grid;
         margin: 0;
+        padding: 0;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1rem;
     }

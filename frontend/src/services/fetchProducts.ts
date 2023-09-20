@@ -11,7 +11,9 @@ export async function fetchProducts (): Promise<Product[]> {
       id: productDto.id,
       image: productDto.image,
       title: productDto.title,
-      price: productDto.price
+      price: productDto.price,
+      category: productDto.category,
+      stars: productDto.rating.rate
     })
   })
   return products
