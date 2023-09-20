@@ -10,14 +10,8 @@ export async function updateProducts (): Promise<void> {
   }
 
   const query = searchQuery.get()
-  let filteredProducts = cachedProducts
   if (query != null) {
-    filteredProducts = []
-    cachedProducts.forEach(product => {
-      if (product.title.toLowerCase().includes(query.toLowerCase())) {
-        filteredProducts.push(product)
-      }
-    })
+    cachedProducts = cachedProducts.filter(product => product.title.toLowerCase().includes(query.toLowerCase()))
   }
-  products.set(filteredProducts)
+  products.set(cachedProducts)
 }
